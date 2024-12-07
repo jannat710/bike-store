@@ -3,7 +3,6 @@ import productRouter from './module/product/product.router';
 
 const app: Application = express();
 
-// middleware
 app.use(express.json());
 
 app.use('/api', productRouter);

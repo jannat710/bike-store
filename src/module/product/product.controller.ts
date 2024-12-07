@@ -40,8 +40,8 @@ const getProduct = async (req: Request, res: Response) => {
 
     const result = await productService.getProduct(filter);
     res.send({
-      status: true,
       message: 'Bikes retrieved successfully',
+      status: true,
       data: result,
     });
   } catch (err) {
@@ -52,24 +52,29 @@ const getProduct = async (req: Request, res: Response) => {
     });
   }
 };
-// const getSingleProduct = async (req: Request, res: Response) => {
-//   try {
-//     const result = await productService.getProduct();
-//     res.send({
-//       status: true,
-//       message: 'Bikes retrieved successfully',
-//       data: result,
-//     });
-//   } catch (err) {
-//     res.status(500).json({
-//       message: 'Something went wrong',
-//       success: false,
-//       error: err,
-//     });
-//   }
-// };
+
+//Get a Specific Bike
+const getSingleProduct = async (req: Request, res: Response) => {
+  try {
+    const productId = req.params.productId;
+    const result = await productService.getSingleProduct(productId);
+
+    res.send({
+      message: 'Bike retrieved successfully',
+      status: true,
+      data: result,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Something went wrong',
+      error,
+    });
+  }
+};
 
 export const productController = {
   createProduct,
   getProduct,
+  getSingleProduct,
 };
