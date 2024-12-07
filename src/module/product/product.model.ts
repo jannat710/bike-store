@@ -1,6 +1,7 @@
 import { model, Schema } from 'mongoose';
+import { IProduct } from './product.interface';
 
-const productSchema = new Schema({
+const productSchema = new Schema<IProduct>({
   name: {
     type: String,
     required: [true, 'Name is required'],
@@ -39,10 +40,11 @@ const productSchema = new Schema({
   inStock: {
     type: Boolean,
     default: true,
+    required: true,
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
 
-const Product = model('Product', productSchema);
+const Product = model<IProduct>('Product', productSchema);
 export default Product;
