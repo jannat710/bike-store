@@ -2,6 +2,25 @@ import { Request, Response } from 'express';
 import { productService } from './product.service';
 
 // Create a Bike
+// const createProduct = async (req: Request, res: Response) => {
+//   try {
+//     const productData = req.body;
+
+//     const result = await productService.createProduct(productData);
+
+//     res.status(200).json({
+//       message: 'Bike created successfully',
+//       success: true,
+//       data: result,
+//     });
+//   } catch (err) {
+//     res.status(500).json({
+//       message: 'Validation failed',
+//       success: false,
+//       error: err,
+//     });
+//   }
+// };
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData = req.body;
@@ -14,10 +33,12 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (err) {
+    const error = err as Error;
     res.status(500).json({
       message: 'Validation failed',
       success: false,
       error: err,
+      stack: error.stack,
     });
   }
 };
